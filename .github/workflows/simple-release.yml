@@ -41,15 +41,3 @@ jobs:
           artifacts: "dist/*.zip"
           generateReleaseNotes: true
           tag: "Dev"
-
-      - name: Purge jsdelivr cache
-        run: |
-          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/install.sh
-          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/nezha-agent.service
-          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/docker-compose.yaml
-          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/config.yaml
-          LOWER_USERNAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/install.sh
-          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/nezha-agent.service
-          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/docker-compose.yaml
-          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/config.yaml

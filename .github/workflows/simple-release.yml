@@ -44,6 +44,7 @@ jobs:
         with:
           artifacts: "dist/*.zip"
           generateReleaseNotes: true
+          tag: "Dev"
 
       - name: Purge jsdelivr cache
         run: |

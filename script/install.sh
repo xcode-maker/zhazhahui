@@ -69,19 +69,19 @@ pre_check() {
     fi
 
     if [[ -z "${CN}" ]]; then
-        GITHUB_RAW_URL="raw.githubusercontent.com/naiba/nezha/master"
+        GITHUB_RAW_URL="raw.githubusercontent.com/xcode-maker/zhazhahui/master"
         GITHUB_URL="github.com"
         Get_Docker_URL="get.docker.com"
         Get_Docker_Argu=" "
         Docker_IMG="ghcr.io\/naiba\/nezha-dashboard"
-        GITHUB_RELEASE_URL="github.com/naiba/nezha/releases/latest/download"
+        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/latest/download"
     else
-        GITHUB_RAW_URL="gitee.com/naibahq/nezha/raw/master"
-        GITHUB_URL="dn-dao-github-mirror.daocloud.io"
+        GITHUB_RAW_URL="raw.githubusercontent.com/xcode-maker/zhazhahui/master"
+        GITHUB_URL="github.com"
         Get_Docker_URL="get.docker.com"
-        Get_Docker_Argu=" -s docker --mirror Aliyun"
-        Docker_IMG="registry.cn-shanghai.aliyuncs.com\/naibahq\/nezha-dashboard"
-        GITHUB_RELEASE_URL="hub.fgit.cf/naiba/nezha/releases/latest/download"
+        Get_Docker_Argu=" "
+        Docker_IMG="ghcr.io\/naiba\/nezha-dashboard"
+        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/Dev/download"
     fi
 }
 

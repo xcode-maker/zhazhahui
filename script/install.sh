@@ -403,6 +403,7 @@ modify_dashboard_config() {
     read -ep "请输入 OAuth2 提供商(github/gitlab/jihulab/gitee，默认 github): " nz_oauth2_type &&
     read -ep "请输入 Oauth2 应用的 Client ID: " nz_github_oauth_client_id &&
     read -ep "请输入 Oauth2 应用的 Client Secret: " nz_github_oauth_client_secret &&
+    read -ep "请输入 Oauth2 应用的 Endpoint(默认为空): " nz_oauth2_endpoint &&
     read -ep "请输入 GitHub/Gitee 登录名作为管理员，多个以逗号隔开: " nz_admin_logins &&
     read -ep "请输入站点标题: " nz_site_title &&
     read -ep "请输入站点访问端口: (默认 8008)" nz_site_port &&
@@ -429,6 +430,7 @@ modify_dashboard_config() {
     sed -i "s/nz_grpc_port/${nz_grpc_port}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_id/${nz_github_oauth_client_id}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_secret/${nz_github_oauth_client_secret}/" /tmp/nezha-config.yaml
+    sed -i "s/nz_oauth2_endpoint/${nz_oauth2_endpoint}/" /tmp/nezha-config.yaml
     sed -i "s/nz_language/zh-CN/" /tmp/nezha-config.yaml
     sed -i "s/nz_site_title/${nz_site_title}/" /tmp/nezha-config.yaml
     sed -i "s/nz_site_port/${nz_site_port}/" /tmp/nezha-docker-compose.yaml

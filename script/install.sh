@@ -430,7 +430,7 @@ modify_dashboard_config() {
     sed -i "s/nz_grpc_port/${nz_grpc_port}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_id/${nz_github_oauth_client_id}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_secret/${nz_github_oauth_client_secret}/" /tmp/nezha-config.yaml
-    awk '{gsub(/nz_oauth2_endpoint/, "${nz_oauth2_endpoint}")} 1' /tmp/nezha-config.yaml
+    sed -i "s|nz_oauth2_endpoint|${nz_oauth2_endpoint}|" /tmp/nezha-config.yaml
     sed -i "s/nz_language/zh-CN/" /tmp/nezha-config.yaml
     sed -i "s/nz_site_title/${nz_site_title}/" /tmp/nezha-config.yaml
     sed -i "s/nz_site_port/${nz_site_port}/" /tmp/nezha-docker-compose.yaml
@@ -493,7 +493,7 @@ modify_dashboard_config_standalone() {
     sed -i "s/nz_grpc_port/${nz_grpc_port}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_id/${nz_github_oauth_client_id}/" /tmp/nezha-config.yaml
     sed -i "s/nz_github_oauth_client_secret/${nz_github_oauth_client_secret}/" /tmp/nezha-config.yaml
-    awk '{gsub(/nz_oauth2_endpoint/, "${nz_oauth2_endpoint}")} 1' /tmp/nezha-config.yaml
+    sed -i "s|nz_oauth2_endpoint|${nz_oauth2_endpoint}|" /tmp/nezha-config.yaml
     sed -i "s/nz_language/zh-CN/" /tmp/nezha-config.yaml
     sed -i "s/nz_site_title/${nz_site_title}/" /tmp/nezha-config.yaml
     sed -i "s/80/${nz_site_port}/" /tmp/nezha-config.yaml

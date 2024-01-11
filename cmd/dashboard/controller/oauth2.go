@@ -24,6 +24,11 @@ import (
 	"github.com/naiba/nezha/service/singleton"
 )
 
+var GitlabSelfEndpoint = oauth2.Endpoint{
+    AuthURL:  "https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/oauth/authorize",
+    TokenURL: "https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/oauth/token",
+}
+
 type oauth2controller struct {
 	r gin.IRoutes
 }
@@ -32,6 +37,7 @@ func (oa *oauth2controller) serve() {
 	oa.r.GET("/oauth2/login", oa.login)
 	oa.r.GET("/oauth2/callback", oa.callback)
 }
+
 
 func (oa *oauth2controller) getCommonOauth2Config(c *gin.Context) *oauth2.Config {
 	if singleton.Conf.Oauth2.Type == model.ConfigTypeGitee {
@@ -51,6 +57,14 @@ func (oa *oauth2controller) getCommonOauth2Config(c *gin.Context) *oauth2.Config
 			ClientSecret: singleton.Conf.Oauth2.ClientSecret,
 			Scopes:       []string{"read_user", "read_api"},
 			Endpoint:     GitlabOauth2.Endpoint,
+			RedirectURL:  oa.getRedirectURL(c),
+		}
+	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
+		return &oauth2.Config{
+			ClientID:     singleton.Conf.Oauth2.ClientID,
+			ClientSecret: singleton.Conf.Oauth2.ClientSecret,
+			Scopes:       []string{"read_user", "read_api"},
+			Endpoint:     GitlabSelfEndpoint,
 			RedirectURL:  oa.getRedirectURL(c),
 		}
 	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeJihulab {

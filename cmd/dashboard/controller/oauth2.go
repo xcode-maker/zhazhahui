@@ -149,7 +149,7 @@ func (oa *oauth2controller) callback(c *gin.Context) {
 			var gitlabApiClient *gitlab.Client
 			if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken)
-			} else singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
+			} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/api/v4/"))
 			} else {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://jihulab.com/api/v4/"))

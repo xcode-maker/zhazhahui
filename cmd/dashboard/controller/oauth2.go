@@ -148,8 +148,6 @@ func (oa *oauth2controller) callback(c *gin.Context) {
 			if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken)
 			} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
-				singleton.Conf.Oauth2.Endpoint
-				
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL(fmt.Sprintf("%s/api/v4/", singleton.Conf.Oauth2.Endpoint)))
 			} else {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://jihulab.com/api/v4/"))

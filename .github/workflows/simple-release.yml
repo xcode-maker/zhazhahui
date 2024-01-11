@@ -20,7 +20,7 @@ jobs:
           dest: dist
           pkg: cmd/dashboard
           prefix: dashboard
-          targets: linux/amd64,linux/arm64,linux/arm-7,linux/s390x,linux/riscv64 # linux/386,
+          targets: linux/amd64,linux/arm64
           v: true
           x: false
           race: false
@@ -38,7 +38,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/*"
+          artifacts: "dist/*.zip"
           generateReleaseNotes: true
           tag: "Dev"
 

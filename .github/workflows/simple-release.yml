@@ -38,7 +38,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/*.zip"
+          artifacts: "dist/*"
           generateReleaseNotes: true
           tag: "Dev"
 

@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: xgo build
+        uses: crazy-max/ghaction-xgo@v2
+        with:
+          xgo_version: latest
+          go_version: 1.21
+          dest: dist
+          pkg: cmd/dashboard
+          prefix: dashboard
+          targets: linux/amd64,linux/arm64,linux/arm-7,linux/s390x,linux/riscv64 # linux/386,
+          v: true
+          x: false
+          race: false
+          ldflags: -s -w --extldflags '-static -fpic'
+          buildmode: default
+
+      - name: fix dist
+        run: |
+          mv dist/dashboard-linux-arm-7 dist/dashboard-linux-arm
+
+      - name: Compress dist files
+        run: |
+          for file in dist/*; do
+            if [ -f "$file" ]; then
+              zip -r "$file.zip" "$file"
+            fi
+          done
+
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*.zip"
+          generateReleaseNotes: true
+
+      - name: Purge jsdelivr cache
+        run: |
+          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/install.sh
+          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/nezha-agent.service
+          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/docker-compose.yaml
+          curl -s https://purge.jsdelivr.net/gh/${{ github.repository_owner }}/nezha@master/script/config.yaml
+          LOWER_USERNAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/install.sh
+          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/nezha-agent.service
+          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/docker-compose.yaml
+          curl -s https://purge.jsdelivr.net/gh/$LOWER_USERNAME/nezha@master/script/config.yaml

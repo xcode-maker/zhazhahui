@@ -400,7 +400,7 @@ modify_dashboard_config() {
 
     echo "关于 GitHub Oauth2 应用：在 https://github.com/settings/developers 创建，无需审核，Callback 填 http(s)://域名或IP/oauth2/callback" &&
     echo "关于 Gitee Oauth2 应用：在 https://gitee.com/oauth/applications 创建，无需审核，Callback 填 http(s)://域名或IP/oauth2/callback" &&
-    read -ep "请输入 OAuth2 提供商(github/gitlab/jihulab/gitee，默认 github): " nz_oauth2_type &&
+    read -ep "请输入 OAuth2 提供商(github/gitlab/gitlabself/jihulab/gitee，默认 github): " nz_oauth2_type &&
     read -ep "请输入 Oauth2 应用的 Client ID: " nz_github_oauth_client_id &&
     read -ep "请输入 Oauth2 应用的 Client Secret: " nz_github_oauth_client_secret &&
     read -ep "请输入 Oauth2 应用的 Endpoint(默认为空): " nz_oauth2_endpoint &&
@@ -463,7 +463,7 @@ modify_dashboard_config_standalone() {
     
     echo "关于 GitHub Oauth2 应用：在 https://github.com/settings/developers 创建，无需审核，Callback 填 http(s)://域名或IP/oauth2/callback" &&
     echo "关于 Gitee Oauth2 应用：在 https://gitee.com/oauth/applications 创建，无需审核，Callback 填 http(s)://域名或IP/oauth2/callback" &&
-    read -ep "请输入 OAuth2 提供商(github/gitlab/jihulab/gitee，默认 github): " nz_oauth2_type &&
+    read -ep "请输入 OAuth2 提供商(github/gitlab/gitlabself/jihulab/gitee，默认 github): " nz_oauth2_type &&
     read -ep "请输入 Oauth2 应用的 Client ID: " nz_github_oauth_client_id &&
     read -ep "请输入 Oauth2 应用的 Client Secret: " nz_github_oauth_client_secret &&
     read -ep "请输入 Oauth2 应用的 Endpoint(默认为空): " nz_oauth2_endpoint &&

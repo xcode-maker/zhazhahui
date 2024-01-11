@@ -37,6 +37,7 @@ const (
 	ConfigTypeGitlab  = "gitlab"
 	ConfigTypeJihulab = "jihulab"
 	ConfigTypeGitea   = "gitea"
+	ConfigTypeGitlabSelf   = "gitlabself"
 )
 
 const (

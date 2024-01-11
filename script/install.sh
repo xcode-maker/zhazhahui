@@ -74,14 +74,14 @@ pre_check() {
         Get_Docker_URL="get.docker.com"
         Get_Docker_Argu=" "
         Docker_IMG="ghcr.io\/naiba\/nezha-dashboard"
-        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/Dev/download"
+        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/download/Dev"
     else
         GITHUB_RAW_URL="raw.githubusercontent.com/xcode-maker/zhazhahui/master"
         GITHUB_URL="github.com"
         Get_Docker_URL="get.docker.com"
         Get_Docker_Argu=" "
         Docker_IMG="ghcr.io\/naiba\/nezha-dashboard"
-        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/Dev/download"
+        GITHUB_RELEASE_URL="github.com/xcode-maker/zhazhahui/releases/download/Dev"
     fi
 }
 

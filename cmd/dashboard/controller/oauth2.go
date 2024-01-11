@@ -145,9 +145,9 @@ func (oa *oauth2controller) callback(c *gin.Context) {
 	var user model.User
 
 	if err == nil {
-		if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab || singleton.Conf.Oauth2.Type == model.ConfigTypeJihulab {
+		if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab || singleton.Conf.Oauth2.Type == model.ConfigTypeJihulab || singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
 			var gitlabApiClient *gitlab.Client
-			if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab {
+			if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab || singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken)
 			} else {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://jihulab.com/api/v4/"))

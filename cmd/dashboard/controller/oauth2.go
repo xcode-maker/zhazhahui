@@ -24,11 +24,6 @@ import (
 	"github.com/naiba/nezha/service/singleton"
 )
 
-var GitlabSelfEndpoint = oauth2.Endpoint{
-    AuthURL:  "https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/oauth/authorize",
-    TokenURL: "https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/oauth/token",
-}
-
 type oauth2controller struct {
 	r gin.IRoutes
 }
@@ -64,7 +59,10 @@ func (oa *oauth2controller) getCommonOauth2Config(c *gin.Context) *oauth2.Config
 			ClientID:     singleton.Conf.Oauth2.ClientID,
 			ClientSecret: singleton.Conf.Oauth2.ClientSecret,
 			Scopes:       []string{"read_user", "read_api"},
-			Endpoint:     GitlabSelfEndpoint,
+			Endpoint: oauth2.Endpoint{
+				AuthURL:  fmt.Sprintf("%s/oauth/authorize", singleton.Conf.Oauth2.Endpoint),
+				TokenURL: fmt.Sprintf("%s/oauth/token", singleton.Conf.Oauth2.Endpoint),
+			},
 			RedirectURL:  oa.getRedirectURL(c),
 		}
 	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeJihulab {
@@ -150,7 +148,9 @@ func (oa *oauth2controller) callback(c *gin.Context) {
 			if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken)
 			} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
-				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/api/v4/"))
+				singleton.Conf.Oauth2.Endpoint
+				
+				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL(fmt.Sprintf("%s/api/v4/", singleton.Conf.Oauth2.Endpoint)))
 			} else {
 				gitlabApiClient, err = gitlab.NewOAuthClient(otk.AccessToken, gitlab.WithBaseURL("https://jihulab.com/api/v4/"))
 			}

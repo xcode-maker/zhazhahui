@@ -43,6 +43,9 @@ func (gp *guestPage) login(c *gin.Context) {
 	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlab {
 		LoginType = "Gitlab"
 		RegistrationLink = "https://gitlab.com/users/sign_up"
+	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeGitlabSelf {
+		LoginType = "GitlabSelf"
+		RegistrationLink = "https://gitlab-tunnel.raonlee.me/Rice-Finished-Corrosive8-Bagpipe/users/sign_up"
 	} else if singleton.Conf.Oauth2.Type == model.ConfigTypeJihulab {
 		LoginType = "Jihulab"
 		RegistrationLink = "https://jihulab.com/users/sign_up"
